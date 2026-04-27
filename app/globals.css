@@ -2,58 +2,37 @@
 
 @layer base {
   :root {
-    /* Dummy declarations to satisfy the IDE's static analysis */
     --font-space: "";
     --font-newsreader: "";
-
     --background: 184 25% 6%;
     --foreground: 184 12% 88%;
   }
 }
 
-
 @theme {
-  /* Fonts */
   --font-display: var(--font-newsreader);
   --font-mono: var(--font-space);
 
   /* System Palette */
   --color-surface: #0d1516;
-  --color-surface-bright: #333a3c;
+  --color-surface-container: #1a2122;
   --color-on-surface: #dce4e5;
-  --color-primary: #dbfcff; /* Neon Cyan */
-  --color-primary-container: #00f0ff;
-  --color-secondary: #e9c176; /* Gold/Amber */
-  --color-tertiary: #ddb7ff; /* Legendary Purple */
-  --color-error: #ffb4ab;
+  --color-primary: #00dbe9;    /* Neon Cyan */
+  --color-secondary: #e9c176;  /* Epic Gold */
+  --color-tertiary: #ddb7ff;   /* Legendary Purple */
   --color-outline: #849495;
 }
 
-@layer base {
-  :root {
-    --background: 204 7% 97%; /* Light Mode Archive */
-    --foreground: 184 25% 6%;
-  }
-
-  .dark {
-    --background: 184 25% 6%; /* Deep Obsidian #080F10 */
-    --foreground: 184 12% 88%;
-  }
-
-  body {
-    @apply bg-[color:var(--color-surface)] text-[color:var(--color-on-surface)] transition-colors duration-500;
-    font-family: var(--font-mono);
-  }
+body {
+  @apply bg-surface text-on-surface transition-colors duration-500 overflow-hidden;
+  font-family: var(--font-mono);
 }
 
-/* Scanline Effect */
 .scanline {
-  background: linear-gradient(
-          to bottom,
-          transparent 50%,
-          rgba(0, 219, 233, 0.02) 50%
-  );
+  background: linear-gradient(to bottom, transparent 50%, rgba(0, 219, 233, 0.02) 50%);
   background-size: 100% 4px;
 }
 
-/* Tailwind ftw */
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: rgba(26, 33, 34, 0.5); }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #00dbe9; box-shadow: 0 0 10px #00dbe9; }
