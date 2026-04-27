@@ -1,38 +1,36 @@
 @import "tailwindcss";
 
 @layer base {
-  :root {
-    --font-space: "";
-    --font-newsreader: "";
-    --background: 184 25% 6%;
-    --foreground: 184 12% 88%;
-  }
+    :root {
+        /* GLOBAL SCALE FACTOR */
+        font-size: 110%;
+
+        --font-space: "";
+        --font-newsreader: "";
+
+        /* System Colors */
+        --background: 184 25% 6%;
+        --foreground: 184 12% 88%;
+    }
 }
 
 @theme {
-  --font-display: var(--font-newsreader);
-  --font-mono: var(--font-space);
-
-  /* System Palette */
-  --color-surface: #0d1516;
-  --color-surface-container: #1a2122;
-  --color-on-surface: #dce4e5;
-  --color-primary: #00dbe9;    /* Neon Cyan */
-  --color-secondary: #e9c176;  /* Epic Gold */
-  --color-tertiary: #ddb7ff;   /* Legendary Purple */
-  --color-outline: #849495;
+    /* CUSTOM HUD FONT SCALE */
+    --text-hud-nano: 0.7rem;    /* Replaces text-hud-nano */
+    --text-hud-micro: 0.85rem;  /* Replaces text-hud-micro */
+    --text-hud-base: 1rem;      /* Replaces text-[11px/12px] */
+    --text-hud-large: 1.25rem;  /* Replaces text-xl */
+    --text-hud-title: 3.5rem;   /* Replaces text-hud-title */
+    --font-display: var(--font-newsreader);
+    --font-mono: var(--font-space);
+    --color-primary: #00dbe9;
+    --color-secondary: #e9c176;
+    --color-tertiary: #ddb7ff;
+    --color-outline: #849495;
 }
 
-body {
-  @apply bg-surface text-on-surface transition-colors duration-500 overflow-hidden;
-  font-family: var(--font-mono);
+/* Mono font seemed too small. Added a little spacing so its easier to read */
+.font-mono {
+    letter-spacing: 0.05em;
+    line-height: 1.6;
 }
-
-.scanline {
-  background: linear-gradient(to bottom, transparent 50%, rgba(0, 219, 233, 0.02) 50%);
-  background-size: 100% 4px;
-}
-
-.custom-scrollbar::-webkit-scrollbar { width: 4px; }
-.custom-scrollbar::-webkit-scrollbar-track { background: rgba(26, 33, 34, 0.5); }
-.custom-scrollbar::-webkit-scrollbar-thumb { background: #00dbe9; box-shadow: 0 0 10px #00dbe9; }

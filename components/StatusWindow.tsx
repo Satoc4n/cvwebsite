@@ -4,7 +4,8 @@ import {
     Coffee, Layers, Search, Target
 } from "lucide-react";
 
-// Data for your current system modifiers
+// Ailments / Statuses.
+// @TODO Find better icons and descriptions
 const AILMENTS = [
     { id: 1, label: "Accomplished", icon: Trophy, color: "#e9c176", desc: "You have achieved a major project milestone." },
     { id: 2, label: "Awakened", icon: Zap, color: "#00dbe9", desc: "System is operating at maximum awareness." },
@@ -29,16 +30,16 @@ export default function StatusWindow() {
                     <header className="space-y-2">
                         <div className="flex items-center gap-2">
                             <div className="w-1 h-6 bg-primary" />
-                            <h2 className="font-display text-4xl uppercase tracking-tighter text-white">Identity</h2>
+                            <h2 className="font-display text-hud-title uppercase tracking-tighter text-white">Identity</h2>
                         </div>
-                        <div className="font-mono text-[9px] text-primary/60 tracking-[.4em] uppercase">
+                        <div className="font-mono text-hud-nano text-primary/60 tracking-[.4em] uppercase">
                             Authenticated_User
                         </div>
                     </header>
 
                     {/* Stats Section */}
                     <section className="space-y-4">
-                        <h3 className="font-mono text-[10px] text-outline uppercase tracking-widest border-b border-white/5 pb-2">Core_Parameters</h3>
+                        <h3 className="font-mono text-hud-micro text-outline uppercase tracking-widest border-b border-white/5 pb-2">Core_Parameters</h3>
                         <div className="grid grid-cols-1 gap-3">
                             <StatItem label="STR" value="80" color="bg-primary" />
                             <StatItem label="CON" value="90" color="bg-primary" />
@@ -51,7 +52,7 @@ export default function StatusWindow() {
 
                     {/* Status Ailments Section */}
                     <section className="space-y-3">
-                        <h3 className="font-mono text-[10px] text-outline uppercase tracking-widest border-b border-white/5 pb-2">Status_Ailments</h3>
+                        <h3 className="font-mono text-hud-micro text-outline uppercase tracking-widest border-b border-white/5 pb-2">Status_Ailments</h3>
                         <div className="flex flex-wrap gap-2 pt-1">
                             {AILMENTS.map((item) => (
                                 <div key={item.id} className="group relative">
@@ -63,20 +64,20 @@ export default function StatusWindow() {
                                         <item.icon size={18} />
                                     </div>
 
-                                    {/* HUD Tooltip */}
+                                    {/* Tooltips for statuses */}
                                     <div className="absolute bottom-full left-0 mb-2 w-48 hidden group-hover:block z-50 pointer-events-none">
                                         <div className="bg-[#0d1516] border border-primary/40 p-2 shadow-2xl backdrop-blur-md">
                                             <div className="flex justify-between items-center mb-1">
-                                                <span className="text-[9px] font-mono font-bold uppercase" style={{ color: item.color }}>
+                                                <span className="text-hud-nano font-mono font-bold uppercase" style={{ color: item.color }}>
                                                     {item.label}
                                                 </span>
                                                 <span className="text-[7px] text-outline font-mono">[ ACTIVE ]</span>
                                             </div>
-                                            <p className="text-[10px] text-on-surface/80 font-mono leading-tight italic">
+                                            <p className="text-hud-micro text-on-surface/80 font-mono leading-tight italic">
                                                 &#34;{item.desc}&#34;
                                             </p>
                                         </div>
-                                        {/* Tooltip Arrow */}
+                                        {/* Tooltip Arrow Starting point: https://www.w3schools.com/css/css_tooltip_arrows.asp */}
                                         <div className="w-2 h-2 bg-[#0d1516] border-r border-b border-primary/40 rotate-45 ml-3 -mt-1" />
                                     </div>
                                 </div>
@@ -86,8 +87,8 @@ export default function StatusWindow() {
 
                     {/* Bio/Info Section */}
                     <section className="space-y-3">
-                        <h3 className="font-mono text-[10px] text-outline uppercase tracking-widest border-b border-white/5 pb-2">Archive_Notes</h3>
-                        <p className="text-[10px] leading-relaxed text-on-surface/60 font-mono italic">
+                        <h3 className="font-mono text-hud-micro text-outline uppercase tracking-widest border-b border-white/5 pb-2">Archive_Notes</h3>
+                        <p className="text-hud-micro leading-relaxed text-on-surface/60 font-mono italic">
                             &#34;A digital architect specializing in the construction of immersive web environments. No corporate history found; potential high-tier rogue developer.&#34;
                         </p>
                     </section>
@@ -108,10 +109,11 @@ export default function StatusWindow() {
     );
 }
 
+//
 function StatItem({ label, value, color }: { label: string, value: string, color: string }) {
     return (
         <div className="space-y-1">
-            <div className="flex justify-between font-mono text-[9px] uppercase">
+            <div className="flex justify-between font-mono text-hud-nano uppercase">
                 <span className="text-outline">{label}</span>
                 <span className="text-white">{value}%</span>
             </div>

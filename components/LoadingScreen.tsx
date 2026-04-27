@@ -13,8 +13,8 @@ const BOOT_LOGS = [
     "[ OK ] ..."
 ];
 
-// Defined outside the component to avoid ESLint TDZ (Temporal Dead Zone) errors and to prevent re-declaration on every render.
 const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
 // Helper to generate a random integer between min and max
 const rand = (min: number, max: number) =>
     Math.floor(Math.random() * (max - min + 1) + min);
@@ -83,7 +83,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
                     <div className="w-6 h-0.5 bg-[#00dbe9] shadow-[0_0_10px_#00dbe9]"></div>
                 </motion.div>
 
-                {/* SYSTEM LOG DISPLAY: Using Space Grotesk via Tailwind's font-mono */}
+                {/* SYSTEM LOG DISPLAY */}
                 <div className="h-24 overflow-hidden px-2 space-y-1">
                     <AnimatePresence mode="popLayout">
                         {BOOT_LOGS.slice(0, logIndex + 1).map((log, i) => (
@@ -91,7 +91,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
                                 key={log}
                                 initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                className="text-[10px] text-[#00dbe9]/70 leading-relaxed uppercase tracking-[0.15em] font-mono"
+                                className="text-hud-micro text-[#00dbe9]/70 leading-relaxed uppercase tracking-[0.15em] font-mono"
                             >
                                 {log}
                             </motion.p>
@@ -101,7 +101,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
 
                 {/* PROGRESS MODULE */}
                 <div className="space-y-3">
-                    <div className="flex justify-between font-mono text-[10px] text-[#849495] uppercase tracking-[0.2em]">
+                    <div className="flex justify-between font-mono text-hud-micro text-[#849495] uppercase tracking-[0.2em]">
                         <span>Initialising_HUD</span>
                         <span className="text-[#00dbe9]">{Math.round(progress)}%</span>
                     </div>
@@ -117,7 +117,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
                 </div>
 
                 {/* FOOTER LABEL */}
-                <p className="text-center text-[9px] text-[#3b494b] uppercase tracking-[0.3em] animate-pulse">
+                <p className="text-center text-hud-nano text-[#3b494b] uppercase tracking-[0.3em] animate-pulse">
                     Awaiting Neural Synchronization
                 </p>
             </div>

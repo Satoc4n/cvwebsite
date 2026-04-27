@@ -29,7 +29,7 @@ export default function ThemeToggle() {
             />
 
             {/* Label that appears on hover */}
-            <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] uppercase tracking-[0.2em] text-[#00dbe9] whitespace-nowrap bg-[#242b2c] px-3 py-1 border border-[#00dbe9]/20 font-mono">
+            <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-hud-micro uppercase tracking-[0.2em] text-[#00dbe9] whitespace-nowrap bg-[#242b2c] px-3 py-1 border border-[#00dbe9]/20 font-mono">
         {theme === "dark" ? "System: Online" : "System: Archive"}
       </span>
         </motion.button>

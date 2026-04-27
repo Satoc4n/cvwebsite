@@ -13,7 +13,7 @@ export default function MiniHUD() {
             {/* Character Portrait Placeholder */}
             <div className="w-12 h-12 border border-primary/40 bg-surface-container-low flex items-center justify-center relative">
                 <div className="absolute inset-0 bg-primary/5 animate-pulse" />
-                <span className="text-primary text-[10px] font-mono">LVL.1</span>
+                <span className="text-primary text-hud-micro font-mono">LVL.1</span>
             </div>
 
             <div className="flex flex-col gap-1">
@@ -21,7 +21,7 @@ export default function MiniHUD() {
                     <h1 className="font-display text-xl text-on-surface uppercase tracking-tight leading-none">
                         Said Kemal Timucin
                     </h1>
-                    <p className="font-mono text-[9px] text-primary uppercase tracking-[0.2em]">
+                    <p className="font-mono text-hud-nano text-primary uppercase tracking-[0.2em]">
                         [ The Unemployed Architect ]
                     </p>
                 </div>

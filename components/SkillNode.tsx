@@ -39,7 +39,7 @@ export default function SkillNode({ name, icon: Icon, level, unlocked, color }: 
             </div>
 
             <div className="text-center">
-                <p className={`font-mono text-[9px] uppercase tracking-widest ${unlocked ? "text-white" : "text-[#849495]"}`}>
+                <p className={`font-mono text-hud-nano uppercase tracking-widest ${unlocked ? "text-white" : "text-[#849495]"}`}>
                     {name}
                 </p>
                 {unlocked && (

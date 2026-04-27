@@ -1,19 +1,18 @@
 "use client";
-// 1. Swap 'TableTennis' for 'Trophy' (or 'Activity' / 'Target')
-import { Code2, Database, Layout, Car, Trophy, Cpu } from "lucide-react";
+
+import {Code2, Database, Layout, Car, Trophy, Cpu} from "lucide-react";
 import SkillNode from "./SkillNode";
 
 const TECH_SKILLS = [
-    { name: "Frontend", icon: Layout, level: 4, unlocked: true, color: "#00dbe9" },
-    { name: "React/Next", icon: Code2, level: 3, unlocked: true, color: "#00dbe9" },
-    { name: "Backend", icon: Database, level: 1, unlocked: true, color: "#00dbe9" },
-    { name: "AI_Systems", icon: Cpu, level: 0, unlocked: false, color: "#ddb7ff" },
+    {name: "Frontend", icon: Layout, level: 4, unlocked: true, color: "#00dbe9"},
+    {name: "React/Next", icon: Code2, level: 3, unlocked: true, color: "#00dbe9"},
+    {name: "Backend", icon: Database, level: 1, unlocked: true, color: "#00dbe9"},
+    {name: "AI_Systems", icon: Cpu, level: 0, unlocked: false, color: "#ddb7ff"},
 ];
 
 const HOBBY_SKILLS = [
-    // 2. Update the icon reference here
-    { name: "T_Tennis", icon: Trophy, level: 5, unlocked: true, color: "#e9c176" },
-    { name: "Mechanics", icon: Car, level: 3, unlocked: true, color: "#e9c176" },
+    {name: "T_Tennis", icon: Trophy, level: 5, unlocked: true, color: "#e9c176"},
+    {name: "Mechanics", icon: Car, level: 3, unlocked: true, color: "#e9c176"},
 ];
 
 export default function SkillTree() {
@@ -22,7 +21,7 @@ export default function SkillTree() {
             <div className="relative z-10 space-y-12">
                 {/* Tech Section */}
                 <div>
-                    <h3 className="font-mono text-[10px] text-[#00dbe9] tracking-[0.4em] uppercase mb-8 text-center">
+                    <h3 className="font-mono text-hud-micro text-[#00dbe9] tracking-[0.4em] uppercase mb-8 text-center">
                         Technical_Aptitude
                     </h3>
                     <div className="flex justify-center gap-8 md:gap-16">
@@ -34,7 +33,7 @@ export default function SkillTree() {
 
                 {/* Hobby Section */}
                 <div className="border-t border-white/5 pt-12">
-                    <h3 className="font-mono text-[10px] text-[#e9c176] tracking-[0.4em] uppercase mb-8 text-center">
+                    <h3 className="font-mono text-hud-micro text-[#e9c176] tracking-[0.4em] uppercase mb-8 text-center">
                         Innate_Talents
                     </h3>
                     <div className="flex justify-center gap-8 md:gap-16">

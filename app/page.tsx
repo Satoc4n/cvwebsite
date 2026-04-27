@@ -3,7 +3,6 @@
 import {useState} from "react";
 import {motion, AnimatePresence} from "motion/react";
 
-// Component Imports
 import LoadingScreen from "@/components/LoadingScreen";
 import MiniHUD from "@/components/MiniHUD";
 import InventoryGrid from "@/components/InventoryGrid";
@@ -20,24 +19,25 @@ export default function Home() {
         <main
             className="relative min-h-screen w-full flex items-center justify-center p-0 bg-[#050505] overflow-hidden">
 
-            {/* 1. THE LOADING SEQUENCE */}
+            {/* THE LOADING SEQUENCE */}
             <AnimatePresence mode="wait">
                 {isLoading && (
                     <LoadingScreen key="loader" onComplete={() => setIsLoading(false)}/>
                 )}
             </AnimatePresence>
 
-            {/* 2. THE WORLD (Everything inside shows only after loading) */}
+            {/* THE WORLD (Everything inside shows only after loading) */}
             {!isLoading && (
                 <>
                     {/* GLOBAL HUD OVERLAY (Scanlines) */}
                     <div className="scanline absolute inset-0 z-50 pointer-events-none opacity-10"/>
 
-                    {/* SYSTEM TOGGLE (Top Right) */}
+                    {/* SYSTEM TOGGLE */}
+                    {/* Currently unused. Could be useful for theme toggle */}
                     <ThemeToggle/>
 
-                    {/* DYNAMIC PLAYER HUD (Top Left)
-              This only appears when NOT looking at the full Status Window */}
+                    {/* DYNAMIC PLAYER HUD */}
+                    {/* This only appears when NOT looking at the full Status Window */}
                     <AnimatePresence>
                         {activeTab !== "status" && (
                             <MiniHUD key="mini-hud"/>
@@ -51,6 +51,7 @@ export default function Home() {
                         transition={{duration: 2, ease: "easeOut"}}
                         className="absolute inset-0 z-0"
                     >
+                        {/* @TODO Image must be changed later */}
                         <div
                             className="absolute inset-0 bg-cover bg-center grayscale-[20%] brightness-[0.3] scale-105"
                             style={{backgroundImage: "url('/mainpage_background.jpg')"}}
@@ -60,7 +61,8 @@ export default function Home() {
                             className="absolute inset-0 bg-gradient-to-b from-[#080f10]/80 via-transparent to-[#080f10]"/>
                     </motion.div>
 
-                    {/* FIRST-PERSON PLAYER ARM (Bottom Right) */}
+                    {/* @TODO Find a better looking arm */}
+                    {/* FIRST-PERSON PLAYER ARM */}
                     <motion.div
                         initial={{y: 500, rotate: 15}}
                         animate={{
@@ -84,22 +86,20 @@ export default function Home() {
 
                     {/* MAIN WINDOW STAGE */}
                     <div className="z-20 w-full h-[75vh] relative mt-[-5vh]">
-                        {/* mt-[-5vh] helps center the whole stage vertically if needed */}
-
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={activeTab}
                                 initial={activeTab === "status"
-                                    ? { x: "-110%", opacity: 0 }
-                                    : { opacity: 0, scale: 0.9, y: 20 }
+                                    ? {x: "-110%", opacity: 0}
+                                    : {opacity: 0, scale: 0.9, y: 20}
                                 }
                                 animate={activeTab === "status"
-                                    ? { x: 0, opacity: 1 }
-                                    : { opacity: 1, scale: 1, y: 0, x: "-50%" } // Centering logic for others
+                                    ? {x: 0, opacity: 1}
+                                    : {opacity: 1, scale: 1, y: 0, x: "-50%"} // Centering logic for others
                                 }
                                 exit={activeTab === "status"
-                                    ? { x: "-110%", opacity: 0 }
-                                    : { opacity: 0, scale: 1.1, y: -20, x: "-50%" }
+                                    ? {x: "-110%", opacity: 0}
+                                    : {opacity: 0, scale: 1.1, y: -20, x: "-50%"}
                                 }
                                 transition={{
                                     type: "spring",
@@ -114,15 +114,16 @@ export default function Home() {
                                         : "left-1/2 w-full max-w-4xl h-full"
                                 }`}
                             >
-                                {activeTab === "status" && <StatusWindow />}
+                                {activeTab === "status" && <StatusWindow/>}
 
                                 {/* Content for Inventory/Skills */}
                                 {activeTab !== "status" && (
                                     <div className="w-full h-full flex justify-center items-center">
-                                        {activeTab === "inventory" && <InventoryGrid />}
-                                        {activeTab === "skills" && <SkillTree />}
+                                        {activeTab === "inventory" && <InventoryGrid/>}
+                                        {activeTab === "skills" && <SkillTree/>}
                                         {activeTab === "lore" && (
-                                            <div className="bg-surface-container/60 p-12 border border-primary/20 backdrop-blur-md">
+                                            <div
+                                                className="bg-surface-container/60 p-12 border border-primary/20 backdrop-blur-md">
                                                 <span className="font-mono text-primary animate-pulse uppercase">[ Access Denied ]</span>
                                             </div>
                                         )}
@@ -132,7 +133,7 @@ export default function Home() {
                         </AnimatePresence>
                     </div>
 
-                    {/* HUD NAVIGATION DOCK (Fixed Bottom) */}
+                    {/* HUD NAVIGATION DOCK */}
                     <HUDNavigation activeTab={activeTab} onTabChange={setActiveTab}/>
                 </>
             )}

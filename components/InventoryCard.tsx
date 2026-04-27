@@ -7,7 +7,7 @@ interface ItemProps {
     description: string;
     type: string;
 }
-
+//@TODO Implement many things
 export default function InventoryCard({ name, grade, description, type }: ItemProps) {
     return (
         <motion.div
@@ -28,8 +28,8 @@ export default function InventoryCard({ name, grade, description, type }: ItemPr
                 </h3>
             </div>
 
-            <p className="font-mono text-[10px] leading-relaxed text-[#849495] italic line-clamp-2">
-                "{description}"
+            <p className="font-mono text-hud-micro leading-relaxed text-[#849495] italic line-clamp-2">
+                &#34;{description}&#34;
             </p>
         </motion.div>
     );
