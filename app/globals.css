@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  /* Fonts */
+  --font-display: var(--font-newsreader);
+  --font-mono: var(--font-space);
+
+  /* System Palette */
+  --color-surface: #0d1516;
+  --color-surface-bright: #333a3c;
+  --color-on-surface: #dce4e5;
+  --color-primary: #dbfcff; /* Neon Cyan */
+  --color-primary-container: #00f0ff;
+  --color-secondary: #e9c176; /* Gold/Amber */
+  --color-tertiary: #ddb7ff; /* Legendary Purple */
+  --color-error: #ffb4ab;
+  --color-outline: #849495;
+}
+
+@layer base {
+  :root {
+    --background: 204 7% 97%; /* Light Mode Archive */
+    --foreground: 184 25% 6%;
+  }
+
+  .dark {
+    --background: 184 25% 6%; /* Deep Obsidian #080F10 */
+    --foreground: 184 12% 88%;
+  }
+
+  body {
+    @apply bg-[color:var(--color-surface)] text-[color:var(--color-on-surface)] transition-colors duration-500;
+    font-family: var(--font-mono);
+  }
+}
+
+/* Scanline Effect */
+.scanline {
+  background: linear-gradient(
+          to bottom,
+          transparent 50%,
+          rgba(0, 219, 233, 0.02) 50%
+  );
+  background-size: 100% 4px;
+}

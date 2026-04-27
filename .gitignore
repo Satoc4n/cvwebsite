@@ -1,0 +1,45 @@
+# --- SYSTEM CORE (Dependencies) ---
+node_modules/
+.pnp
+.pnp.js
+
+# --- THE VOID (Build Output) ---
+.next/
+out/
+build/
+dist/
+.vercel
+
+# --- DATA LOGS (Debug & Misc) ---
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.DS_Store
+*.local
+
+# --- LORE SECRETS (Environment Variables) ---
+# Never commit your actual keys to GitHub
+.env*.local
+.env
+
+# --- ARCHITECT TOOLS (IDEs) ---
+# JetBrains/WebStorm
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# VS Code / Cursor
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+
+# --- SYSTEM CACHE ---
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+next-env.d.ts
