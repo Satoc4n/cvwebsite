@@ -64,13 +64,11 @@ export default function Home() {
                     <motion.div
                         initial={{y: 500, rotate: 15}}
                         animate={{
-                            y: 0,
                             rotate: 0,
                             x: [0, 8, 0],
                             y: [0, -8, 0]
                         }}
                         transition={{
-                            y: {duration: 1.2, ease: "circOut"},
                             rotate: {duration: 1.2, ease: "circOut"},
                             x: {repeat: Infinity, duration: 5, ease: "easeInOut"},
                             y: {repeat: Infinity, duration: 4, ease: "easeInOut"}

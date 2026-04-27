@@ -1,8 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## What is this repo?
 
-## Getting Started
-
-First, run the development server:
+### This repo is for my personal usage, meaning for my CV website, mainly. 
 
 ```bash
 npm run dev

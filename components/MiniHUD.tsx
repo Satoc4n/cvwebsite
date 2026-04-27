@@ -6,7 +6,7 @@ export default function MiniHUD() {
         <motion.div
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={{ x: -100, opacity: 0 }} // Smoothly slides out to the left
+            exit={{ x: -100, opacity: 0 }}
             transition={{ duration: 0.5, ease: "circOut" }}
             className="fixed top-8 left-8 z-40 flex items-start gap-4"
         >
