@@ -1,75 +1,72 @@
 "use client";
-import { motion } from "motion/react";
-import { Shield, Zap, Target, Star } from "lucide-react";
 
 export default function StatusWindow() {
-  return (
-    <motion.div 
-      initial={{ opacity: 0, y: 30, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="relative group max-w-md w-full p-1 rounded-lg bg-linear-to-b from-cyan-500/30 to-transparent backdrop-blur-md"
-    >
-      {/* Scanline Overlay Effect @TODO Find a better solution. Depending on the final aesthetic can be distracting. */}
-      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%)] bg-[size:100%_4px] z-10 opacity-30"></div>
+    return (
+        <div className="h-[85vh] w-full bg-[#1a2122]/90 backdrop-blur-2xl border border-[#00dbe9]/30 flex flex-col relative shadow-[20px_0_60px_rgba(0,0,0,0.8)]">
 
-      <div className="bg-slate-950/90 p-6 rounded-md border border-cyan-500/20 shadow-[0_0_20px_rgba(6,182,212,0.15)]">
-        {/* Header */}
-        <div className="flex justify-between items-center border-b border-cyan-900/50 pb-3 mb-6">
-          <div className="flex items-center gap-2">
-            <Shield className="w-4 h-4 text-cyan-400 animate-pulse" />
-            <h2 className="text-cyan-400 font-mono text-[10px] tracking-[0.2em] uppercase">
-              Character Status
-            </h2>
-          </div>
-          <span className="text-[10px] text-slate-500 font-mono italic">UID: 001-001-00001-00001</span>
+            {/* Decorative HUD "Scanner" line at the top */}
+            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-primary to-transparent opacity-50" />
+
+            <div className="p-8 flex-1 flex flex-col justify-between">
+                <div className="space-y-12">
+                    {/* Header Section */}
+                    <header className="space-y-2">
+                        <div className="flex items-center gap-2">
+                            <div className="w-1 h-6 bg-primary" />
+                            <h2 className="font-display text-4xl uppercase tracking-tighter text-white">Identity</h2>
+                        </div>
+                        <div className="font-mono text-[9px] text-primary/60 tracking-[.4em] uppercase">
+                            Authenticated_User
+                        </div>
+                    </header>
+
+                    {/* Stats Section */}
+                    <section className="space-y-6">
+                        <h3 className="font-mono text-[10px] text-outline uppercase tracking-widest border-b border-white/5 pb-2">Core_Parameters</h3>
+                        <div className="space-y-4">
+                            <StatItem label="STR" value="80" color="bg-primary" />
+                            <StatItem label="CON" value="90" color="bg-primary" />
+                            <StatItem label="DEX" value="30" color="bg-tertiary" />
+                            <StatItem label="INT" value="75" color="bg-secondary" />
+                            <StatItem label="WISDOM" value="80" color="bg-primary" />
+                            <StatItem label="CHAR" value="70" color="bg-secondary" />
+                        </div>
+                    </section>
+
+                    {/* Bio/Info Section */}
+                    <section className="space-y-3">
+                        <h3 className="font-mono text-[10px] text-outline uppercase tracking-widest border-b border-white/5 pb-2">Archive_Notes</h3>
+                        <p className="text-[11px] leading-relaxed text-on-surface/70 font-mono italic">
+                            &#34;A digital architect specializing in the construction of immersive web environments. No corporate history found; potential high-tier rogue developer.&#34;
+                        </p>
+                    </section>
+                </div>
+
+                {/* Footer Data */}
+                <footer className="pt-8 border-t border-white/5">
+                    <div className="flex justify-between font-mono text-[8px] text-outline uppercase tracking-widest">
+                        <span>Lat: 48.311420 Lon: 369.063521</span>
+                        <span>OS: V.1.0.4</span>
+                    </div>
+                </footer>
+            </div>
+
+            {/* Corner bracket at the bottom right */}
+            <div className="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-primary/20" />
         </div>
-
-        {/* Content */}
-        <div className="space-y-6">
-          <section>
-            <h1 className="text-4xl font-serif tracking-tighter text-white uppercase mb-1">
-              Your Name
-            </h1>
-            <p className="text-cyan-500 font-mono text-xs uppercase tracking-widest">
-              Class: [ The Unemployed Architect ]
-            </p>
-          </section>
-
-          {/* Stats Bar */}
-          <div className="space-y-3">
-            <StatBar label="React Synchronicity" value={65} icon={<Zap size={12}/>} />
-            <StatBar label="CSS Manipulation" value={82} icon={<Target size={12}/>} />
-            <StatBar label="Algorithm Logic" value={40} icon={<Star size={12}/>} />
-          </div>
-
-          {/* Lore/About */}
-          <div className="bg-cyan-500/5 p-3 border-l-2 border-cyan-500/50 italic">
-            <p className="text-[11px] text-slate-300 leading-relaxed">
-              &#34;Placeholder content for now. A motto etc could be nice.&#34;
-            </p>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
+    );
 }
 
-function StatBar({ label, value, icon }: { label: string, value: number, icon: React.ReactNode }) {
-  return (
-    <div className="space-y-1">
-      <div className="flex justify-between items-center text-[9px] uppercase tracking-wider text-slate-400">
-        <span className="flex items-center gap-1">{icon} {label}</span>
-        <span>{value}%</span>
-      </div>
-      <div className="h-1 bg-slate-900 rounded-full overflow-hidden border border-white/5">
-        <motion.div 
-          initial={{ width: 0 }}
-          animate={{ width: `${value}%` }}
-          transition={{ duration: 1.5, delay: 0.5, ease: "circOut" }}
-          className="h-full bg-linear-to-r from-cyan-600 to-cyan-400 shadow-[0_0_8px_#06b6d4]"
-        />
-      </div>
-    </div>
-  );
+function StatItem({ label, value, color }: { label: string, value: string, color: string }) {
+    return (
+        <div className="space-y-1">
+            <div className="flex justify-between font-mono text-[9px] uppercase">
+                <span className="text-outline">{label}</span>
+                <span className="text-white">{value}%</span>
+            </div>
+            <div className="h-[2px] w-full bg-white/5 relative">
+                <div className={`absolute inset-y-0 left-0 ${color} shadow-[0_0_8px_currentColor]`} style={{ width: `${value}%` }} />
+            </div>
+        </div>
+    );
 }
