@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+@layer base {
+  :root {
+    /* Dummy declarations to satisfy the IDE's static analysis */
+    --font-space: "";
+    --font-newsreader: "";
+
+    --background: 184 25% 6%;
+    --foreground: 184 12% 88%;
+  }
+}
+
+
 @theme {
   /* Fonts */
   --font-display: var(--font-newsreader);
@@ -43,3 +55,5 @@
   );
   background-size: 100% 4px;
 }
+
+/* Tailwind ftw */

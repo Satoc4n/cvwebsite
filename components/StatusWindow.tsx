@@ -10,7 +10,7 @@ export default function StatusWindow() {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="relative group max-w-md w-full p-1 rounded-lg bg-linear-to-b from-cyan-500/30 to-transparent backdrop-blur-md"
     >
-      {/* Scanline Overlay Effect */}
+      {/* Scanline Overlay Effect @TODO Find a better solution. Depending on the final aesthetic can be distracting. */}
       <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%)] bg-[size:100%_4px] z-10 opacity-30"></div>
 
       <div className="bg-slate-950/90 p-6 rounded-md border border-cyan-500/20 shadow-[0_0_20px_rgba(6,182,212,0.15)]">
@@ -22,7 +22,7 @@ export default function StatusWindow() {
               Character Status
             </h2>
           </div>
-          <span className="text-[10px] text-slate-500 font-mono italic">UID: 001-KIM-DOKJA-VIBES</span>
+          <span className="text-[10px] text-slate-500 font-mono italic">UID: 001-001-00001-00001</span>
         </div>
 
         {/* Content */}
@@ -46,7 +46,7 @@ export default function StatusWindow() {
           {/* Lore/About */}
           <div className="bg-cyan-500/5 p-3 border-l-2 border-cyan-500/50 italic">
             <p className="text-[11px] text-slate-300 leading-relaxed">
-              "A wanderer influenced by the grit of Berserk and the strategy of Code Geass. Current objective: Build a legacy from zero."
+              &#34;Placeholder content for now. A motto etc could be nice.&#34;
             </p>
           </div>
         </div>

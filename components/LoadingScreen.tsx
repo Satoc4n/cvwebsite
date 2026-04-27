@@ -1,69 +1,126 @@
 "use client";
+
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
 
-// BOOT LOGS for the loading screen
+// Boot messages
 const BOOT_LOGS = [
-  "[ OK ] INITIALIZING CORE_SYSTEM_v.0.0.1",
-  "[ OK ] LOADING LORE_DATABASE...",
-  "[ OK ] SYNCHRONIZING ASSETS",
-  "[ OK ] BOOTING INTERFACE",
-  "[ OK ] SYSTEM READY."
+    "[ OK ] INITIALIZING CORE_SYSTEM_V.1.0.4",
+    "[ OK ] LOADING DATABASE...",
+    "[ OK ] SYNCHRONIZING ASSETS",
+    "[ OK ] BOOTING INTERFACE",
+    "[ OK ] SYSTEM READY.",
+    "[ OK ] ..."
 ];
 
-export default function LoadingScreen({ onComplete }: { onComplete: () => void }) {
-  const [currentLog, setCurrentLog] = useState(0);
+// Defined outside the component to avoid ESLint TDZ (Temporal Dead Zone) errors and to prevent re-declaration on every render.
+const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
+// Helper to generate a random integer between min and max
+const rand = (min: number, max: number) =>
+    Math.floor(Math.random() * (max - min + 1) + min);
 
-  useEffect(() => {
-    if (currentLog < BOOT_LOGS.length - 1) {
-      const timer = setTimeout(() => setCurrentLog(prev => prev + 1), 600);
-      return () => clearTimeout(timer);
-    } else {
-      const finishTimer = setTimeout(onComplete, 1000);
-      return () => clearTimeout(finishTimer);
-    }
-  }, [currentLog, onComplete]);
+interface LoadingScreenProps {
+    onComplete: () => void;
+}
 
-  // Main Loading Screen Component 
-  return (
-    <motion.div 
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black font-mono p-4"
-    >
-      <div className="w-full max-w-sm space-y-4">
-        {/* The Glowing Logo/Icon */}
-        <motion.div 
-          animate={{ scale: [1, 1.05, 1], opacity: [0.5, 1, 0.5] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="w-12 h-12 border-2 border-cyan-500 mx-auto rounded-sm flex items-center justify-center"
+export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
+    const [progress, setProgress] = useState(0);
+    const [logIndex, setLogIndex] = useState(0);
+
+    useEffect(() => {
+        const updateProgress = async () => {
+            // Phase 1: Initial surge to 15-44%
+            await wait(rand(300, 700));
+            setProgress(rand(15, 44));
+            setLogIndex(1);
+
+            // Phase 2: The "System Struggle" (Wait, then jump to 60-80%)
+            await wait(rand(1000, 1800));
+            setProgress(rand(60, 80));
+            setLogIndex(2);
+
+            // Phase 3: Final data synchronization
+            await wait(rand(500, 1000));
+            setLogIndex(3);
+            setProgress(100);
+
+            // Phase 4: System Stability Check
+            await wait(700);
+            setLogIndex(4);
+            await wait(500);
+
+            // Continue
+            onComplete();
+        };
+
+        updateProgress();
+    }, [onComplete]);
+
+    return (
+        <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0, filter: "blur(20px)" }}
+            transition={{ duration: 0.8 }}
+            className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#080f10] font-mono p-6"
         >
-          <div className="w-6 h-1 bg-cyan-500 shadow-[0_0_10px_#00f2ff]"></div>
+            {/* 1px Scanline overlay to simulate a holographic CRT display */}
+            <div className="absolute inset-0 pointer-events-none z-10 opacity-10 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[size:100%_2px,3px_100%]"></div>
+
+            <div className="w-full max-w-sm space-y-8 relative z-20">
+                {/* HOLOGRAPHIC LOGO - Currently only a placeholder */}
+                <motion.div
+                    animate={{
+                        opacity: [0.4, 1, 0.4],
+                        boxShadow: [
+                            "0 0 0px rgba(0, 219, 233, 0)",
+                            "0 0 20px rgba(0, 219, 233, 0.4)",
+                            "0 0 0px rgba(0, 219, 233, 0)",
+                        ],
+                    }}
+                    transition={{ repeat: Infinity, duration: 2 }}
+                    className="w-12 h-12 border border-[#00dbe9] mx-auto flex items-center justify-center bg-[#dbfcff]/5"
+                >
+                    <div className="w-6 h-0.5 bg-[#00dbe9] shadow-[0_0_10px_#00dbe9]"></div>
+                </motion.div>
+
+                {/* SYSTEM LOG DISPLAY: Using Space Grotesk via Tailwind's font-mono */}
+                <div className="h-24 overflow-hidden px-2 space-y-1">
+                    <AnimatePresence mode="popLayout">
+                        {BOOT_LOGS.slice(0, logIndex + 1).map((log, i) => (
+                            <motion.p
+                                key={log}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                className="text-[10px] text-[#00dbe9]/70 leading-relaxed uppercase tracking-[0.15em] font-mono"
+                            >
+                                {log}
+                            </motion.p>
+                        ))}
+                    </AnimatePresence>
+                </div>
+
+                {/* PROGRESS MODULE */}
+                <div className="space-y-3">
+                    <div className="flex justify-between font-mono text-[10px] text-[#849495] uppercase tracking-[0.2em]">
+                        <span>Initialising_HUD</span>
+                        <span className="text-[#00dbe9]">{Math.round(progress)}%</span>
+                    </div>
+
+                    <div className="w-full h-[2px] bg-[#1a2122] overflow-hidden relative">
+                        <motion.div
+                            initial={{ width: "0%" }} // Set the starting width. Without this it starts from 100% then jumps back to where it should be.
+                            animate={{ width: `${progress}%` }}
+                            transition={{ type: "spring", stiffness: 40, damping: 15 }}
+                            className="h-full bg-[#00dbe9] shadow-[0_0_15px_#00dbe9]"
+                        />
+                    </div>
+                </div>
+
+                {/* FOOTER LABEL */}
+                <p className="text-center text-[9px] text-[#3b494b] uppercase tracking-[0.3em] animate-pulse">
+                    Awaiting Neural Synchronization
+                </p>
+            </div>
         </motion.div>
-
-        {/* Boot Logs */}
-        <div className="h-24 overflow-hidden">
-          {BOOT_LOGS.slice(0, currentLog + 1).map((log, i) => (
-            <motion.p 
-              key={i}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="text-[10px] text-cyan-500/80 leading-relaxed"
-            >
-              {log}
-            </motion.p>
-          ))}
-        </div>
-
-        {/* Loading Bar */}
-        <div className="w-full h-[2px] bg-slate-900 overflow-hidden">
-          <motion.div 
-            initial={{ width: "0%" }}
-            animate={{ width: "100%" }}
-            transition={{ duration: 3.5, ease: "linear" }}
-            className="h-full bg-cyan-500 shadow-[0_0_15px_#00f2ff]"
-          />
-        </div>
-      </div>
-    </motion.div>
-  );
+    );
 }
