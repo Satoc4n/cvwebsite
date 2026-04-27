@@ -62,7 +62,8 @@ export default function Home() {
                     </motion.div>
 
                     {/* @TODO Find a better looking arm */}
-                    {/* FIRST-PERSON PLAYER ARM */}
+                    {/*
+                    FIRST-PERSON PLAYER ARM
                     <motion.div
                         initial={{y: 500, rotate: 15}}
                         animate={{
@@ -82,51 +83,65 @@ export default function Home() {
                             alt="Player Arm"
                             className="w-full h-auto drop-shadow-[0_0_50px_rgba(0,0,0,0.9)]"
                         />
-                    </motion.div>
+                    </motion.div>*/}
 
                     {/* MAIN WINDOW STAGE */}
-                    <div className="z-20 w-full h-[75vh] relative mt-[-5vh]">
+                    <div className="z-20 w-full h-[80vh] relative">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={activeTab}
-                                initial={activeTab === "status"
-                                    ? {x: "-110%", opacity: 0}
-                                    : {opacity: 0, scale: 0.9, y: 20}
+
+                                initial={
+                                    activeTab === "status" ? { x: "-110%", opacity: 0 } :
+                                        activeTab === "inventory" ? { x: "110%", opacity: 0 } :
+                                            activeTab === "skills" ? { y: "-120%", x: "-50%", opacity: 0 } : // Drop from top
+                                                { opacity: 0, scale: 0.9, y: 20 }
                                 }
-                                animate={activeTab === "status"
-                                    ? {x: 0, opacity: 1}
-                                    : {opacity: 1, scale: 1, y: 0, x: "-50%"} // Centering logic for others
+
+                                animate={
+                                    activeTab === "status" ? { x: 0, opacity: 1 } :
+                                        activeTab === "inventory" ? { x: 0, opacity: 1 } :
+                                            activeTab === "skills" ? { y: "-50%", x: "-50%", opacity: 1 } : // Center vertically/horizontally
+                                                { opacity: 1, scale: 1, y: 0, x: "-50%" }
                                 }
-                                exit={activeTab === "status"
-                                    ? {x: "-110%", opacity: 0}
-                                    : {opacity: 0, scale: 1.1, y: -20, x: "-50%"}
+
+                                exit={
+                                    activeTab === "status" ? { x: "-110%", opacity: 0 } :
+                                        activeTab === "inventory" ? { x: "110%", opacity: 0 } :
+                                            activeTab === "skills" ? { y: "-120%", x: "-50%", opacity: 0 } : // Fly back to top
+                                                { opacity: 0, scale: 1.1, y: -20, x: "-50%" }
                                 }
                                 transition={{
                                     type: "spring",
-                                    stiffness: 50,
-                                    damping: 18,
+                                    stiffness: 45, // Slightly lower stiffness for a "heavy" drop feel
+                                    damping: 15,
                                     mass: 1.2
                                 }}
-                                // Here is the magic: Status stays left, Others stay centered
-                                className={`absolute top-0 ${
-                                    activeTab === "status"
-                                        ? "left-10 w-full md:w-[25vw] h-full"
-                                        : "left-1/2 w-full max-w-4xl h-full"
+
+                                className={`absolute ${
+                                    activeTab === "status" ? "left-10 top-0 w-full md:w-[25vw] h-full" :
+                                        activeTab === "inventory" ? "right-10 top-0 w-full md:w-[25vw] h-full" :
+                                            "left-1/2 top-1/2 w-full max-w-4xl" // Centered for Skills
                                 }`}
                             >
-                                {activeTab === "status" && <StatusWindow/>}
+                                {activeTab === "status" && <StatusWindow />}
+                                {activeTab === "inventory" && <InventoryGrid />}
 
-                                {/* Content for Inventory/Skills */}
-                                {activeTab !== "status" && (
+                                {/* --- Skills Section --- */}
+                                {activeTab === "skills" && (
                                     <div className="w-full h-full flex justify-center items-center">
-                                        {activeTab === "inventory" && <InventoryGrid/>}
-                                        {activeTab === "skills" && <SkillTree/>}
-                                        {activeTab === "lore" && (
-                                            <div
-                                                className="bg-surface-container/60 p-12 border border-primary/20 backdrop-blur-md">
-                                                <span className="font-mono text-primary animate-pulse uppercase">[ Access Denied ]</span>
-                                            </div>
-                                        )}
+                                        <SkillTree />
+                                    </div>
+                                )}
+
+                                {/* --- Lore / Encrypted Section --- */}
+                                {activeTab === "lore" && (
+                                    <div className="w-full h-full flex justify-center items-center">
+                                        <div className="bg-surface-container/60 p-12 border border-primary/20 backdrop-blur-md">
+                        <span className="font-mono text-hud-micro text-primary animate-pulse uppercase">
+                            [ Access Denied: Insufficient Clearance ]
+                        </span>
+                                        </div>
                                     </div>
                                 )}
                             </motion.div>

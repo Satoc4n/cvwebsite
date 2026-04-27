@@ -1,6 +1,18 @@
 "use client";
 import { motion } from "motion/react";
 
+// Helper function to get a specific date :)
+function getAge(birthDateString: string) {
+    const today = new Date();
+    const birthDate = new Date(birthDateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+
 export default function MiniHUD() {
     return (
         <motion.div
@@ -13,13 +25,13 @@ export default function MiniHUD() {
             {/* Character Portrait Placeholder */}
             <div className="w-12 h-12 border border-primary/40 bg-surface-container-low flex items-center justify-center relative">
                 <div className="absolute inset-0 bg-primary/5 animate-pulse" />
-                <span className="text-primary text-hud-micro font-mono">LVL.1</span>
+                <span className="text-primary text-hud-micro font-mono">LVL.{getAge("1992-04-15")}</span> {/* Not my real birthday its just a placeholder */}
             </div>
 
             <div className="flex flex-col gap-1">
                 <div className="flex flex-col">
                     <h1 className="font-display text-xl text-on-surface uppercase tracking-tight leading-none">
-                        Said Kemal Timucin
+                        Redacted Name
                     </h1>
                     <p className="font-mono text-hud-nano text-primary uppercase tracking-[0.2em]">
                         [ The Unemployed Architect ]

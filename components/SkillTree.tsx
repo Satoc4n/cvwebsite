@@ -1,24 +1,29 @@
 "use client";
 
-import {Code2, Database, Layout, Car, Trophy, Cpu} from "lucide-react";
+import {Code2, Database, Layout, Car, Trophy, Cpu, Volleyball, Dumbbell} from "lucide-react";
 import SkillNode from "./SkillNode";
 
 const TECH_SKILLS = [
-    {name: "Frontend", icon: Layout, level: 4, unlocked: true, color: "#00dbe9"},
-    {name: "React/Next", icon: Code2, level: 3, unlocked: true, color: "#00dbe9"},
-    {name: "Backend", icon: Database, level: 1, unlocked: true, color: "#00dbe9"},
-    {name: "AI_Systems", icon: Cpu, level: 0, unlocked: false, color: "#ddb7ff"},
+    {name: "Frontend", icon: Layout, level: 2, unlocked: true, color: "#00dbe9"},
+    {name: "React/Next", icon: Code2, level: 2, unlocked: true, color: "#00dbe9"},
+    {name: "Backend", icon: Database, level: 2, unlocked: true, color: "#00dbe9"},
+    {name: "Java", icon: Code2, level: 3, unlocked: true, color: "#00dbe9"},
+    {name: "C", icon: Code2, level: 3, unlocked: true, color: "#00dbe9"},
+    {name: "Python", icon: Code2, level: 3, unlocked: true, color: "#00dbe9"}
+
 ];
 
 const HOBBY_SKILLS = [
-    {name: "T_Tennis", icon: Trophy, level: 5, unlocked: true, color: "#e9c176"},
-    {name: "Mechanics", icon: Car, level: 3, unlocked: true, color: "#e9c176"},
+    {name: "Table_Tennis", icon: Trophy, level: 5, unlocked: true, color: "#e9c176"},
+    {name: "Football", icon: Volleyball, level: 1, unlocked: true, color: "#e9c176"},
+    {name: "Basketball", icon: Volleyball, level: 2, unlocked: true, color: "#e9c176"},
+    {name: "Gym", icon: Dumbbell, level: 4, unlocked: true, color: "#e9c176"}
 ];
 
 export default function SkillTree() {
     return (
         <div className="relative w-full max-w-3xl p-8 bg-[#1a2122]/40 backdrop-blur-md border border-[#849495]/10">
-            <div className="relative z-10 space-y-12">
+            <div className="relative z- 10 space-y-12">
                 {/* Tech Section */}
                 <div>
                     <h3 className="font-mono text-hud-micro text-[#00dbe9] tracking-[0.4em] uppercase mb-8 text-center">
